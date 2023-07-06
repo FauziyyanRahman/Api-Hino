@@ -30,7 +30,8 @@ Route::resource('category/sub', 'App\Http\Controllers\Category\SubCategoryContro
 /**
  * Api home
  */
-Route::resource('home', 'App\Http\Controllers\Home\HomeController', ['only' => ['index', 'show']]);
+Route::resource('home', 'App\Http\Controllers\Home\HomeController', ['only' => ['index', 'create']]);
+Route::get('home/admin', 'App\Http\Controllers\Home\HomeController@adminPanel');
 
 /**
  * Api contact

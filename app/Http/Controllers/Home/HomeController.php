@@ -62,4 +62,20 @@ class HomeController extends Controller
     {
         //
     }
+
+    /**
+     * Checking user credential for admin panel
+     */
+    public function adminPanel()
+    {
+        // Retrieve the data you want to return as JSON
+        $data = [
+            'name' => 'John Doe',
+            'email' => 'johndoe@example.com',
+            // Add more data as needed
+        ];
+        
+        // Return the data as JSON response
+        return response()->json($data);
+    }
 }
