@@ -62,3 +62,8 @@ Route::resource('report', 'App\Http\Controllers\Report\ReportController', ['only
  * Api sidebar
  */
 Route::resource('sidebar', 'App\Http\Controllers\Sidebar\SidebarController', ['only' => ['index', 'show']]);
+
+/**
+ * Api sidebar
+ */
+Route::resource('users', 'App\Http\Controllers\Users\UsersController', ['only' => ['index', 'show']]);
