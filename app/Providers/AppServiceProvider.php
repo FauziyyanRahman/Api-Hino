@@ -21,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \DB::connection()->getDoctrineConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('permission_t', 'string');
+
         /*
         try {
             DB::connection()->getPDO();
