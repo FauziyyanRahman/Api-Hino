@@ -15,5 +15,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model
 {
-    use HasFactory;
+    protected $table = 'mskategori';
+    protected $primaryKey = 'ms_kategori_id';
+    public $timestamps = false;
+    protected $fillable = [
+        'ms_kategori_level',
+        'ms_kategori_name',
+        'ms_kategori_name_en',
+        'ms_kategori_parent',
+        'ms_kategori_file',
+        'ms_kategori_image',
+        'ms_kategori_flag_turunan',
+        'ms_kategori_flag_form',
+        'active',
+        'created_at',
+        'created_by',
+        'update_at',
+        'update_by',
+        'deleted_at',
+        'deleted_by',
+        'deleteable',
+    ];
 }
