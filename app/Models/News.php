@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\News
@@ -18,7 +19,28 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|News query()
  * @mixin \Eloquent
  */
-class News extends User
+class News extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
+
+    protected $table = 'msberita';
+    protected $primaryKey = 'ms_berita_id';
+    protected $dates = ['deleted_at'];
+    protected $guarded = [];
+
+    protected $casts = [
+        'ms_berita_id' => 'integer',
+        'ms_berita_judul' => 'string',
+        'ms_berita_judul_en' => 'string',
+        'ms_berita_content' => 'string',
+        'ms_berita_content_en' => 'string',
+        'ms_berita_image' => 'string',
+        'created_at' => 'datetime',
+        'created_by' => 'integer',
+        'update_at' => 'datetime',
+        'update_by' => 'integer',
+        'deleted_at' => 'datetime',
+        'deleted_by' => 'integer',
+        'deleteable' => 'integer',
+    ];
 }
