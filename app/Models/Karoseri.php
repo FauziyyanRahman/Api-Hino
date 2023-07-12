@@ -21,7 +21,7 @@ class Karoseri extends Model
     public $timestamps = false;
 
     protected $casts = [
-        'ms_karoseri_id' => 'bigint',
+        'ms_karoseri_id' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'deleted_by' => 'integer',
