@@ -36,4 +36,28 @@ class Category extends Model
         'deleted_by',
         'deleteable',
     ];
+
+    // Relationship to get the parent category for level 1
+    public function level1Parent()
+    {
+        return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id');
+    }
+
+    // Relationship to get the parent category for level 2
+    public function level2Parent()
+    {
+        return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level1Parent');
+    }
+
+    // Relationship to get the parent category for level 3
+    public function level3Parent()
+    {
+        return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level2Parent');
+    }
+
+    // Relationship to get the parent category for level 4
+    public function level4Parent()
+    {
+        return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level3Parent');
+    }
 }
