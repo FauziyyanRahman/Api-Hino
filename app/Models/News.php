@@ -43,4 +43,16 @@ class News extends Model
         'deleted_by' => 'integer',
         'deleteable' => 'integer',
     ];
+
+    // Define the relationship with the User model for create user
+    public function createUser()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    // Define the relationship with the User model for update user
+    public function updateUser()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }
