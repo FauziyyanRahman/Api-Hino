@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\News\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,58 +14,36 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
+| Owner: Fauziyyan Thafhan Rahman
 */
 
 /**
- * Api default
+ * Default API route to get the authenticated user's information.
+ * This route requires the user to be authenticated using Sanctum.
  */
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+}); */
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+/**
+ * Protect routes with JWT token (requires authentication).
+ * All routes inside this group require a valid JWT token to access.
+ */
+Route::group(['middleware' => 'auth.api'], function () {
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);    
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
+    Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::post('/survey', [AuthController::class, 'survey']);
+
+    Route::get('/id-berita/{id}', [NewsController::class, 'getBeritaByID']);
+    Route::get('/data-berita', [NewsController::class, 'dataBerita']);
+    Route::post('/add-berita', [NewsController::class, 'AddMsBerita']);
+    Route::post('/update-berita', [NewsController::class, 'ubahMsBerita']);
+    Route::delete('/delete-berita/{news}', [NewsController::class, 'deleteMsBerita']);
 });
-
-/**
- * Api category & sub category
- */
-Route::resource('category', 'App\Http\Controllers\Category\CategoryController', ['only' => ['index', 'show']]);
-Route::resource('category/sub', 'App\Http\Controllers\Category\SubCategoryController', ['only' => ['index', 'show']]);
-
-/**
- * Api home
- */
-Route::resource('home', 'App\Http\Controllers\Home\HomeController', ['only' => ['index', 'create']]);
-Route::get('home/admin', 'App\Http\Controllers\Home\HomeController@adminPanel');
-
-/**
- * Api contact
- */
-Route::resource('contact', 'App\Http\Controllers\Contact\ContactController', ['only' => ['index', 'show']]);
-
-/**
- * Api karoseri
- */
-Route::resource('karoseri', 'App\Http\Controllers\Karoseri\KaroseriController', ['only' => ['index', 'show']]);
-
-/**
- * Api login
- */
-Route::resource('login', 'App\Http\Controllers\Login\LoginController', ['only' => ['index', 'show']]);
-
-/**
- * Api news
- */
-Route::resource('news', 'App\Http\Controllers\News\NewsController', ['only' => ['index', 'show']]);
-
-/**
- * Api report
- */
-Route::resource('report', 'App\Http\Controllers\Report\ReportController', ['only' => ['index', 'show']]);
-
-/**
- * Api sidebar
- */
-Route::resource('sidebar', 'App\Http\Controllers\Sidebar\SidebarController', ['only' => ['index', 'show']]);
-
-/**
- * Api sidebar
- */
-Route::resource('users', 'App\Http\Controllers\Users\UsersController', ['only' => ['index', 'show']]);

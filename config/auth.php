@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -35,10 +35,17 @@ return [
     |
     */
 
-    'guards' => [
+    /*'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+    ],*/
+
+    'guards' => [
+        'api' => [
+            'driver' => 'jwt', // Set the driver to 'jwt' for JWT authentication
+            'provider' => 'custom_users', // Use your custom user provider
         ],
     ],
 
@@ -59,7 +66,7 @@ return [
     |
     */
 
-    'providers' => [
+    /*'providers' => [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
@@ -69,6 +76,13 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+    ],*/
+
+    'providers' => [
+        'custom_users' => [
+            'driver' => 'custom_users', // Use your custom user provider
+            'model' => App\Models\Users::class, // Use your CustomUsers model
+        ],
     ],
 
     /*
@@ -90,9 +104,18 @@ return [
     |
     */
 
-    'passwords' => [
+    /*'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],*/
+
+    'passwords' => [
+        'users' => [
+            'provider' => 'custom_users', // Use your custom user provider for password resets
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

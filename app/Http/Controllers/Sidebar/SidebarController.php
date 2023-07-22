@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sidebar;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class SidebarController extends Controller
@@ -12,7 +13,11 @@ class SidebarController extends Controller
      */
     public function index()
     {
-        //
+        $getMenu = Category::where('active', 1)
+        ->where('ms_kategori_level', 1)
+        ->get();
+
+        return $getMenu;
     }
 
     /**
