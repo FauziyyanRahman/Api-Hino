@@ -6,6 +6,57 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * App\Models\RequestForm
+ *
+ * @property int $request_id
+ * @property string|null $request_user_id
+ * @property string|null $request_date
+ * @property string|null $request_status
+ * @property string|null $request_update_by
+ * @property string|null $request_update_date
+ * @property int|null $request_kategori_id
+ * @property string|null $request_karoseri_name
+ * @property string|null $request_pic
+ * @property string|null $request_muatan
+ * @property string|null $request_body
+ * @property string|null $request_tdp
+ * @property string $request_status_reason
+ * @property string|null $created_at
+ * @property int|null $created_by
+ * @property string|null $update_at
+ * @property int|null $update_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int|null $deleted_by
+ * @property int|null $deleteable
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereDeleteable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestKaroseriName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestKategoriId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestMuatan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestPic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestStatusReason($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestTdp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestUpdateBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestUpdateDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereUpdateAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereUpdateBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|RequestForm withoutTrashed()
+ * @mixin \Eloquent
+ */
 class RequestForm extends Model
 {
     use SoftDeletes;

@@ -11,6 +11,44 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category query()
+ * @property int $ms_kategori_id
+ * @property int|null $ms_kategori_level
+ * @property string $ms_kategori_name
+ * @property string|null $ms_kategori_name_en
+ * @property int|null $ms_kategori_parent
+ * @property string|null $ms_kategori_file
+ * @property string|null $ms_kategori_image
+ * @property int|null $ms_kategori_flag_turunan
+ * @property int|null $ms_kategori_flag_form
+ * @property int|null $active
+ * @property string|null $created_at
+ * @property int|null $created_by
+ * @property string|null $update_at
+ * @property int|null $update_by
+ * @property string|null $deleted_at
+ * @property int|null $deleted_by
+ * @property int|null $deleteable
+ * @property-read Category|null $level1Parent
+ * @property-read Category|null $level2Parent
+ * @property-read Category|null $level3Parent
+ * @property-read Category|null $level4Parent
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereDeleteable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereDeletedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriFlagForm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriFlagTurunan($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereMsKategoriParent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdateAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category whereUpdateBy($value)
  * @mixin \Eloquent
  */
 class Category extends Model
