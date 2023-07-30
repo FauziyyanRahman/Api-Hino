@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\Category\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +48,7 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/add-berita', [NewsController::class, 'AddMsBerita']);
     Route::post('/update-berita', [NewsController::class, 'ubahMsBerita']);
     Route::delete('/delete-berita/{news}', [NewsController::class, 'deleteMsBerita']);
+
+    Route::get('/main-category/{main}', [CategoryController::class, 'getMainCategory']);
+    
 });

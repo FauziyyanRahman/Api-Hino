@@ -27,13 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $survey_date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property int|null $created_by
-<<<<<<< HEAD
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $updated_by
-=======
- * @property string|null $update_at
- * @property int|null $update_by
->>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property int|null $deleted_by
  * @property int|null $deleteable
@@ -62,13 +57,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Survey whereSurveyQuestion3($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Survey whereSurveyQuestion4($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Survey whereSurveyUsername($value)
-<<<<<<< HEAD
  * @method static \Illuminate\Database\Eloquent\Builder|Survey whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Survey whereUpdatedBy($value)
-=======
- * @method static \Illuminate\Database\Eloquent\Builder|Survey whereUpdateAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Survey whereUpdateBy($value)
->>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @method static \Illuminate\Database\Eloquent\Builder|Survey withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Survey withoutTrashed()
  * @mixin \Eloquent

@@ -115,13 +115,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriUnitproductioncap($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriWebsite($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriWilayah($value)
-<<<<<<< HEAD
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateId($value)
-=======
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateBy($value)
->>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @mixin \Eloquent
  */
 class Karoseri extends Model

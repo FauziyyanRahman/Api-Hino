@@ -22,28 +22,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $request_body
  * @property string|null $request_tdp
  * @property string $request_status_reason
-<<<<<<< HEAD
-=======
- * @property string|null $created_at
- * @property int|null $created_by
- * @property string|null $update_at
- * @property int|null $update_by
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property int|null $deleted_by
- * @property int|null $deleteable
->>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm query()
-<<<<<<< HEAD
-=======
- * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereDeleteable($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereDeletedBy($value)
->>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestBody($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestId($value)
@@ -57,11 +39,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestUpdateBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestUpdateDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereRequestUserId($value)
-<<<<<<< HEAD
-=======
- * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereUpdateAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RequestForm whereUpdateBy($value)
->>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|RequestForm withoutTrashed()
  * @mixin \Eloquent
