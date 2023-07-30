@@ -43,9 +43,51 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri query()
+<<<<<<< HEAD
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreateDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreateId($value)
+=======
+ * @property int $ms_karoseri_id
+ * @property string|null $ms_karoseri_region
+ * @property string|null $ms_karoseri_wilayah
+ * @property string|null $ms_karoseri_tipe
+ * @property string|null $ms_karoseri_name
+ * @property string|null $ms_karoseri_merk
+ * @property string|null $ms_karoseri_domisili
+ * @property string|null $ms_karoseri_alamat
+ * @property string|null $ms_karoseri_telepon
+ * @property string|null $ms_karoseri_fax
+ * @property string|null $ms_karoseri_website
+ * @property string|null $ms_karoseri_unitproductioncap
+ * @property string|null $ms_karoseri_grade
+ * @property string|null $ms_karoseri_productlineup
+ * @property string|null $ms_karoseri_photoproduct
+ * @property string|null $ms_karoseri_owner_name
+ * @property string|null $ms_karoseri_owner_telepon
+ * @property string|null $ms_karoseri_owner_email
+ * @property string|null $ms_karoseri_marketing_name
+ * @property string|null $ms_karoseri_marketing_telepon
+ * @property string|null $ms_karoseri_marketing_email
+ * @property string|null $ms_karoseri_engineering_name
+ * @property string|null $ms_karoseri_engineering_telepon
+ * @property string|null $ms_karoseri_engineering_email
+ * @property string|null $ms_karoseri_production_name
+ * @property string|null $ms_karoseri_production_telepon
+ * @property string|null $ms_karoseri_production_email
+ * @property string|null $created_at
+ * @property int|null $created_by
+ * @property string|null $update_at
+ * @property int|null $update_by
+ * @property string|null $deleted_at
+ * @property int|null $deleted_by
+ * @property int|null $deleteable
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeleteable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeletedBy($value)
+>>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriAlamat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriDomisili($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriEngineeringEmail($value)
@@ -73,8 +115,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriUnitproductioncap($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriWebsite($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriWilayah($value)
+<<<<<<< HEAD
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateId($value)
+=======
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateBy($value)
+>>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @mixin \Eloquent
  */
 class Karoseri extends Model

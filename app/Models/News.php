@@ -34,9 +34,28 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|News newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|News onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|News query()
+<<<<<<< HEAD
  * @method static \Illuminate\Database\Eloquent\Builder|News whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News whereCreateDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News whereCreateId($value)
+=======
+ * @property int $ms_berita_id
+ * @property string|null $ms_berita_judul
+ * @property string|null $ms_berita_judul_en
+ * @property string|null $ms_berita_content
+ * @property string|null $ms_berita_content_en
+ * @property string|null $ms_berita_image
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property int|null $created_by
+ * @property \Illuminate\Support\Carbon|null $update_at
+ * @property int|null $update_by
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int|null $deleted_by
+ * @property int|null $deleteable
+ * @property-read \App\Models\User|null $createUser
+ * @property-read \App\Models\User|null $updateUser
+ * @method static \Illuminate\Database\Eloquent\Builder|News onlyTrashed()
+>>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @method static \Illuminate\Database\Eloquent\Builder|News whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News whereDeleteable($value)
@@ -50,6 +69,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|News whereMsBeritaJudulEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News whereUpdateAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News whereUpdateBy($value)
+<<<<<<< HEAD
  * @method static \Illuminate\Database\Eloquent\Builder|News whereUpdateDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News whereUpdateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|News withTrashed()
@@ -60,6 +80,10 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $roles_count
  * @method static \Illuminate\Database\Eloquent\Builder|News permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|News role($roles, $guard = null)
+=======
+ * @method static \Illuminate\Database\Eloquent\Builder|News withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|News withoutTrashed()
+>>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @mixin \Eloquent
  */
 class News extends Model
