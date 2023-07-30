@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Karoseri
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri query()
  * @property int $ms_karoseri_id
  * @property string|null $ms_karoseri_region
  * @property string|null $ms_karoseri_wilayah
@@ -38,18 +35,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $ms_karoseri_production_name
  * @property string|null $ms_karoseri_production_telepon
  * @property string|null $ms_karoseri_production_email
- * @property string|null $created_at
- * @property int|null $created_by
- * @property string|null $update_at
- * @property int|null $update_by
- * @property string|null $deleted_at
- * @property int|null $deleted_by
- * @property int|null $deleteable
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeleteable($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeletedBy($value)
+ * @property int|null $active
+ * @property int|null $create_id
+ * @property string|null $create_date
+ * @property int|null $update_id
+ * @property string|null $update_date
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreateDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreateId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriAlamat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriDomisili($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriEngineeringEmail($value)
@@ -77,8 +73,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriUnitproductioncap($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriWebsite($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriWilayah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereUpdateId($value)
  * @mixin \Eloquent
  */
 class Karoseri extends Model
