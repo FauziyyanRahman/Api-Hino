@@ -43,11 +43,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri query()
-<<<<<<< HEAD
+ * <<<<<<< HEAD
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreateDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereCreateId($value)
-=======
+ * =======
  * @property int $ms_karoseri_id
  * @property string|null $ms_karoseri_region
  * @property string|null $ms_karoseri_wilayah
@@ -87,7 +87,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeleteable($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereDeletedBy($value)
->>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
+ * >>>>>>> 02b16a2d8ca2269701d814d1164d45662d6d55a9
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriAlamat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriDomisili($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Karoseri whereMsKaroseriEngineeringEmail($value)

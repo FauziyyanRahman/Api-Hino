@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\Category
@@ -68,6 +69,17 @@ class Category extends Model
         'deleted_by',
         'deleteable',
     ];
+
+    // Function to include PostgreSQL functions
+    public function getKategoriParentName()
+    {
+        return DB::selectOne('SELECT getkategoriname(?::int) as name', [$this->ms_kategori_parent])->name;
+    }
+
+    public function getKategoriParentNameEn()
+    {
+        return DB::selectOne('SELECT getkategoriname_en(?::int) as name', [$this->ms_kategori_parent])->name;
+    }
 
     // Relationship to get the parent category for level 1
     public function level1Parent()
