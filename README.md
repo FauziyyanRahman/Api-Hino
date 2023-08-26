@@ -81,3 +81,23 @@ Hino API built using Laravel as Backend Framework
 
 ## License
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Step jalankan tanpa xampp / docker image
+
+Pakai PHP versi 8.2.xxx
+
+
+1. composer require tymon/jwt-auth
+
+php.ini yg perlu di nyalakan adalah
+extension=fileinfo
+extension=gd
+extension=pdo_pgsql
+extension=pgsql
+
+2. 
+Jika tidak ada pgsql , maka install pakai cmd linux
+sudo apt-get install php5-pgsql
+
+3. php artisan
