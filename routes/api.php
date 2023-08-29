@@ -49,8 +49,9 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/update-berita', [NewsController::class, 'ubahMsBerita']);
     Route::delete('/delete-berita/{news}', [NewsController::class, 'deleteMsBerita']);
 
-    Route::get('/main-category/{main}', [CategoryController::class, 'getMainCategory']);
-    Route::get('/level-category/{id}', [CategoryController::class, 'getKategoriByLevel']);
+    //Route::get('/main-category/{main}', [CategoryController::class, 'getMainCategory']);
+    Route::get('/main-category', [CategoryController::class, 'getMainCategory']);
+    //Route::get('/level-category/{id}', [CategoryController::class, 'getKategoriByLevel']);
     Route::post('/add-audit-trail', [CategoryController::class, 'insertAuditTrail']);
     Route::post('/add-respond', [CategoryController::class, 'respondRequestForm']); 
     Route::post('/add-request', [CategoryController::class, 'requestCategory']); 

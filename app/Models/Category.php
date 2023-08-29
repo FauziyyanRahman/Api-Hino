@@ -70,38 +70,55 @@ class Category extends Model
         'deleteable',
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
+
+    public function scopeSelectColumns($query)
+    {
+        return $query->select([
+            'ms_kategori_level',
+            'ms_kategori_parent',
+            'ms_kategori_id',
+            'ms_kategori_name',
+            'ms_kategori_name_en',
+            'active',
+        ]);
+    }
+
     // Function to include PostgreSQL functions
-    public function getKategoriParentName()
-    {
-        return DB::selectOne('SELECT getkategoriname(?::int) as name', [$this->ms_kategori_parent])->name;
-    }
+    // public function getKategoriParentName()
+    // {
+    //     return DB::selectOne('SELECT getkategoriname(?::int) as name', [$this->ms_kategori_parent])->name;
+    // }
 
-    public function getKategoriParentNameEn()
-    {
-        return DB::selectOne('SELECT getkategoriname_en(?::int) as name', [$this->ms_kategori_parent])->name;
-    }
+    // public function getKategoriParentNameEn()
+    // {
+    //     return DB::selectOne('SELECT getkategoriname_en(?::int) as name', [$this->ms_kategori_parent])->name;
+    // }
 
-    // Relationship to get the parent category for level 1
-    public function level1Parent()
-    {
-        return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id');
-    }
+    // // Relationship to get the parent category for level 1
+    // public function level1Parent()
+    // {
+    //     return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id');
+    // }
 
-    // Relationship to get the parent category for level 2
-    public function level2Parent()
-    {
-        return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level1Parent');
-    }
+    // // Relationship to get the parent category for level 2
+    // public function level2Parent()
+    // {
+    //     return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level1Parent');
+    // }
 
-    // Relationship to get the parent category for level 3
-    public function level3Parent()
-    {
-        return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level2Parent');
-    }
+    // // Relationship to get the parent category for level 3
+    // public function level3Parent()
+    // {
+    //     return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level2Parent');
+    // }
 
-    // Relationship to get the parent category for level 4
-    public function level4Parent()
-    {
-        return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level3Parent');
-    }
+    // // Relationship to get the parent category for level 4
+    // public function level4Parent()
+    // {
+    //     return $this->belongsTo(Category::class, 'ms_kategori_parent', 'ms_kategori_id')->with('level3Parent');
+    // }
 }

@@ -21,74 +21,116 @@ class CategoryController extends Controller
         $this->middleware('auth.api');
     }
 
-    public function getMainCategory($main_id)
-    {        
-        // Validate the input to prevent SQL injection and other security issues
-        try {
-            Validator::validate(['main_id' => $main_id], ['main_id' => 'required|numeric']);
-        } catch (ValidationException $e) {
-            return response()->json(['success' => false, 'message' => 'Invalid input. The id parameter is required.'], Response::HTTP_BAD_REQUEST);
-        }
-        // Fetch the main category by its ID
-        $getMsKategori = Category::with('level1Parent')
-            ->select('*')
-            ->where('active', 1)
-            ->where('ms_kategori_id', $main_id)
-            ->orderBy('ms_kategori_id', 'asc')
+    public function getMainCategory(){
+        $categories = Category::active()
+            ->selectColumns()
+            ->orderBy('ms_kategori_level')
             ->get();
-
-        // Fetch the subcategories of the main category
-        $getMsKategori2 = Category::with('level2Parent')
-            ->select('*')
-            ->where('active', 1)
-            ->where('ms_kategori_parent', $main_id)
-            ->orderBy('ms_kategori_id', 'asc')
-            ->get();
-
-        // Fetch the subcategories of subcategories (nested subcategories)
-        $getMsKategori3 = Category::with('level3Parent')
-            ->whereIn('ms_kategori_parent', function ($query) use ($main_id) {
-                $query->select('ms_kategori_id')
-                    ->from('mskategori')
-                    ->where('active', 1)
-                    ->where('ms_kategori_parent', $main_id);
-            })
-            ->where('active', 1)
-            ->orderBy('ms_kategori_id', 'asc')
-            ->get();
-
-        $dataMsKategori = [
-            'getMsKategori' => $getMsKategori,
-            'getMsKategori2' => $getMsKategori2,
-            'getMsKategori3' => $getMsKategori3
-        ];
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Categories and their relationships retrieved successfully.',
-            'data' => $dataMsKategori,
-        ], Response::HTTP_OK);
+    
+        $categoryTree = $this->buildCategoryTree($categories);
+    
+        return response()->json($categoryTree);
     }
     
-    public function getKategoriByLevel($id)
-    {
-        try {
-            Validator::validate(['main_id' => $id], ['main_id' => 'required|numeric']);
-        } catch (ValidationException $e) {
-            return response()->json(['success' => false, 'message' => 'Invalid input. The id parameter is required.'], Response::HTTP_BAD_REQUEST);
+    protected function buildCategoryTree($categories, $parent = null) {
+        $tree = [];
+    
+        foreach ($categories as $category) {
+            if ($category->ms_kategori_parent == $parent) {
+                $subcategories = $this->buildCategoryTree($categories, $category->ms_kategori_id);
+    
+                $categoryData = [
+                    'ms_kategori_level' => $category->ms_kategori_level,
+                    'ms_kategori_parent' => $category->ms_kategori_parent,
+                    'ms_kategori_id' => $category->ms_kategori_id,
+                    'name_id' => $category->ms_kategori_name,
+                    'name_en' => $category->ms_kategori_name_en,
+                    'active' => $category->active,
+                ];
+    
+                if (!empty($subcategories)) {
+                    $categoryData['Level' . ($category->ms_kategori_level + 1)] = $subcategories;
+                }
+    
+                if ($parent === null || $parent === 0) {
+                    $tree[] = ['Level1' => $categoryData];
+                } else {
+                    $tree[] = $categoryData;
+                }
+            }
         }
-
-        // Fetch categories by their level using the Category model
-        $getMsKategori = Category::where('active', 1)
-            ->where('ms_kategori_level', $id)
-            ->get();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Categories level retrieved successfully.',
-            'data' => $getMsKategori,
-        ], Response::HTTP_OK);
+    
+        return $tree;
     }
+       
+    // public function getMainCategory($main_id)
+    // {        
+    //     // Validate the input to prevent SQL injection and other security issues
+    //     try {
+    //         Validator::validate(['main_id' => $main_id], ['main_id' => 'required|numeric']);
+    //     } catch (ValidationException $e) {
+    //         return response()->json(['success' => false, 'message' => 'Invalid input. The id parameter is required.'], Response::HTTP_BAD_REQUEST);
+    //     }
+    //     // Fetch the main category by its ID
+    //     $getMsKategori = Category::with('level1Parent')
+    //         ->select('*')
+    //         ->where('active', 1)
+    //         ->where('ms_kategori_id', $main_id)
+    //         ->orderBy('ms_kategori_id', 'asc')
+    //         ->get();
+
+    //     // Fetch the subcategories of the main category
+    //     $getMsKategori2 = Category::with('level2Parent')
+    //         ->select('*')
+    //         ->where('active', 1)
+    //         ->where('ms_kategori_parent', $main_id)
+    //         ->orderBy('ms_kategori_id', 'asc')
+    //         ->get();
+
+    //     // Fetch the subcategories of subcategories (nested subcategories)
+    //     $getMsKategori3 = Category::with('level3Parent')
+    //         ->whereIn('ms_kategori_parent', function ($query) use ($main_id) {
+    //             $query->select('ms_kategori_id')
+    //                 ->from('mskategori')
+    //                 ->where('active', 1)
+    //                 ->where('ms_kategori_parent', $main_id);
+    //         })
+    //         ->where('active', 1)
+    //         ->orderBy('ms_kategori_id', 'asc')
+    //         ->get();
+
+    //     $dataMsKategori = [
+    //         'getMsKategori' => $getMsKategori,
+    //         'getMsKategori2' => $getMsKategori2,
+    //         'getMsKategori3' => $getMsKategori3
+    //     ];
+
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Categories and their relationships retrieved successfully.',
+    //         'data' => $dataMsKategori,
+    //     ], Response::HTTP_OK);
+    // }
+    
+    // public function getKategoriByLevel($id)
+    // {
+    //     try {
+    //         Validator::validate(['main_id' => $id], ['main_id' => 'required|numeric']);
+    //     } catch (ValidationException $e) {
+    //         return response()->json(['success' => false, 'message' => 'Invalid input. The id parameter is required.'], Response::HTTP_BAD_REQUEST);
+    //     }
+
+    //     // Fetch categories by their level using the Category model
+    //     $getMsKategori = Category::where('active', 1)
+    //         ->where('ms_kategori_level', $id)
+    //         ->get();
+
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Categories level retrieved successfully.',
+    //         'data' => $getMsKategori,
+    //     ], Response::HTTP_OK);
+    // }
 
     public function insertAuditTrail(Request $request)
     {
