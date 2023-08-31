@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Message\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +56,6 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/add-audit-trail', [CategoryController::class, 'insertAuditTrail']);
     Route::post('/add-respond', [CategoryController::class, 'respondRequestForm']); 
     Route::post('/add-request', [CategoryController::class, 'requestCategory']); 
+    
+    Route::post('/store', [MessageController::class, 'store']); 
 });
