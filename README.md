@@ -101,3 +101,11 @@ Jika tidak ada pgsql , maka install pakai cmd linux
 sudo apt-get install php5-pgsql
 
 3. php artisan
+php artisan cache:clear
+php artisan route:cache
+
+# Dengan xampp
+Cukup install xampp dengan PHP 8.2++
+
+Full path menjadi http://localhost/Hino/public/api/add-berita
+
