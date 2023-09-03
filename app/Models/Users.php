@@ -110,6 +110,11 @@ class Users extends Authenticatable implements JWTSubject
         return $this->belongsTo(Karoseri::class, 'ms_body_maker_id', 'ms_karoseri_id');
     }
 
+    public function at()
+    {
+        return $this->hasMany(AT::class, 'user_id', 'ms_user_id');
+    }
+
     public function logins()
     {
         return $this->hasMany(AT::class, 'user_id');

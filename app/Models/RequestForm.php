@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * App\Models\RequestForm
@@ -82,4 +83,29 @@ class RequestForm extends Model
         'deleted_by' => 'integer',
         'deleteable' => 'integer',
     ];
+       
+    public static function getRequest()
+    {
+        return DB::select("SELECT GETCOUNT_REQUESTFORM('') as Total,
+            GETCOUNT_REQUESTFORM('approve') as Approve,
+            GETCOUNT_REQUESTFORM('reject') as Reject,
+            GETCOUNT_REQUESTFORM('request') as Request");
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(Users::class, 'request_user_id', 'ms_user_id');
+    }
+
+    // Define a relationship to the MSKATEGORI table
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'request_kategori_id', 'ms_kategori_id');
+    }
+
+     // Create a scope for filtering by REQUEST_STATUS
+     public function scopeRequestStatus($query)
+     {
+         return $query->where('request_status', 'LIKE', '%Request%');
+     }
 }

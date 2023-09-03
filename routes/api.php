@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Home\HomeController;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -58,4 +59,7 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/add-request', [CategoryController::class, 'requestCategory']); 
     
     Route::post('/store', [MessageController::class, 'store']); 
+
+    Route::get('/visitors', [HomeController::class, 'visitors']); 
+    Route::get('/requestData', [HomeController::class, 'requestData']); 
 });
