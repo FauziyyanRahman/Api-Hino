@@ -61,5 +61,5 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/store', [MessageController::class, 'store']); 
 
     Route::get('/visitors', [HomeController::class, 'visitors']); 
-    Route::get('/requestData', [HomeController::class, 'requestData']); 
+    Route::get('/yajra', [HomeController::class, 'yajraData']); 
 });

@@ -58,13 +58,13 @@ class HomeController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function requestData() {
+    public function yajraData() {
         $requestData = RequestForm::requestStatus()->select('request_id', 
             'MU.ms_user_name as username', 
             DB::raw("to_char(request_date, 'DD MON YYYY, HH24:MI') as request_date"),
             'request_status',
             'MK.ms_kategori_name as kategori_name',
-            'request_karoseri_name', 'request_body','request_form.created_at'
+            'request_karoseri_name', 'request_body','request_form.created_at', 'MK.ms_kategori_file'
             )
             ->join('mskategori as MK', 'MK.ms_kategori_id', '=', 'request_kategori_id')
             ->join('msuser as MU', 'MU.ms_user_id', '=', DB::raw('CAST(request_user_id AS integer)'))
@@ -72,7 +72,7 @@ class HomeController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Request form data retrieved successfully.',
+            'message' => 'Yajra data request form retrieved successfully.',
             'data' => $requestData,
         ], Response::HTTP_OK);
     }

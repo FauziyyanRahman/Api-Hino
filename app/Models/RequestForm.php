@@ -87,9 +87,9 @@ class RequestForm extends Model
     public static function getRequest()
     {
         return DB::select("SELECT GETCOUNT_REQUESTFORM('') as Total,
-            GETCOUNT_REQUESTFORM('approve') as Approve,
-            GETCOUNT_REQUESTFORM('reject') as Reject,
-            GETCOUNT_REQUESTFORM('request') as Request");
+            GETCOUNT_REQUESTFORM('Approve') as Approve,
+            GETCOUNT_REQUESTFORM('Reject') as Reject,
+            GETCOUNT_REQUESTFORM('Request') as Request");
     }
 
     public function users()

@@ -198,9 +198,11 @@ class CategoryController extends Controller
                     ->where('ms_kategori_id', DB::raw('(select request_kategori_id FROM request_form where request_id=' . $id . ')'))
                     ->where('active', 1)
                     ->first();
-
+                
+                $request_user_id = $file_kategori->request_user_id ?? '';    
+                
                 $user = DB::table('msuser')
-                    ->where('ms_user_id', $file_kategori->request_user_id)
+                    ->where('ms_user_id', $request_user_id)
                     ->where('active', 1)
                     ->first();
 
@@ -225,12 +227,14 @@ class CategoryController extends Controller
         } else {
             return response()->json([
                 'success' => false,
+                'approval' => $status,
                 'message' => 'Sorry, the mail server is currently offline. Please try again later.',
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return response()->json([
             'success' => true,
+            'approval' => $status,
             'message' => 'Email successfully send.',
         ], Response::HTTP_OK);
     }
