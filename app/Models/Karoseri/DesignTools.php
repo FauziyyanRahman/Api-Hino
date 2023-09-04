@@ -19,6 +19,7 @@ class DesignTools extends Model
         'ms_threed_program_design',
         'created_by',
         'update_by',
+        'deleted_by',
         'ms_company_id',
     ];
 
@@ -29,19 +30,4 @@ class DesignTools extends Model
     ];
 
     public $timestamps = false;
-    
-    public function createdByUser()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updatedByUser()
-    {
-        return $this->belongsTo(User::class, 'update_by');
-    }
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class, 'ms_company_id');
-    }
 }

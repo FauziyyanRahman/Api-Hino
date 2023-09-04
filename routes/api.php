@@ -11,6 +11,8 @@ use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Message\MessageController;
 use App\Http\Controllers\Karoseri\DesignToolsController;
 use App\Http\Controllers\Karoseri\IdentityController;
+use App\Http\Controllers\Karoseri\EquipmentController;
+use App\Http\Controllers\Karoseri\PicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,4 +79,16 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/design-tools', [DesignToolsController::class, 'store']);
     Route::put('/design-tools/{id}', [DesignToolsController::class, 'update']);
     Route::delete('/design-tools/{id}', [DesignToolsController::class, 'destroy']);
+
+    Route::get('/equipment', [EquipmentController::class, 'index']);
+    Route::get('/equipment/{id}', [EquipmentController::class, 'show']);
+    Route::post('/equipment', [EquipmentController::class, 'store']);
+    Route::put('/equipment/{id}', [EquipmentController::class, 'update']);
+    Route::delete('/equipment/{id}', [EquipmentController::class, 'destroy']);
+
+    Route::get('/pic', [PicController::class, 'index']);
+    Route::get('/pic/{id}', [PicController::class, 'show']);
+    Route::post('/pic', [PicController::class, 'store']);
+    Route::put('/pic/{id}/{area}', [PicController::class, 'update']);
+    Route::delete('/pic/{id}', [PicController::class, 'destroy']);
 });
