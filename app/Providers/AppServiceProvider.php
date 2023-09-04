@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Karoseri\IdentityService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use SebastianBergmann\LinesOfCode\Exception;
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(IdentityService::class, function ($app) {
+            return new IdentityService();
+        });
     }
 
     /**

@@ -9,6 +9,8 @@ use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Message\MessageController;
 
+use App\Http\Controllers\Karoseri\IdentityController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -62,4 +64,10 @@ Route::group(['middleware' => 'auth.api'], function () {
 
     Route::get('/visitors', [HomeController::class, 'visitors']); 
     Route::get('/yajra', [HomeController::class, 'yajraData']); 
+
+    Route::get('/identities', [IdentityController::class, 'index']);
+    Route::get('/identities/{id}', [IdentityController::class, 'show']);
+    Route::post('/identities', [IdentityController::class, 'store']);
+    Route::put('/identities/{id}', [IdentityController::class, 'update']);
+    Route::delete('/identities/{id}', [IdentityController::class, 'destroy']);
 });
