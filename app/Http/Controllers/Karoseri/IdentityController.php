@@ -27,9 +27,39 @@ class IdentityController extends Controller
      *
      * @return \Illuminate\Database\Eloquent\Collection|Identity[]
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Identity::all();
+        try {
+            // Check if pagination parameters are provided
+            $pageSize = $request->query('page_size');
+            $page = $request->query('page');
+    
+            if ($pageSize && $page) {
+                // If both page_size and page parameters are provided, paginate the results
+                $identities = Identity::paginate($pageSize, ['*'], 'page', $page);
+            } else {
+                // If no pagination parameters are provided, retrieve all records
+                $identities = Identity::withTrashed()->get();
+            }
+    
+            // Check if any records were found
+            if ($identities->isEmpty()) {
+                return response()->json(['message' => 'No records found'], 404);
+            }
+    
+            // Return the records as JSON
+            return response()->json([
+                'success' => true,
+                'message' => 'Identity data retrieved successfully.',
+                'data' => $identities,
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Error in index method: ' . $e->getMessage());
+    
+            // Return an error response
+            return response()->json(['message' => 'An error occurred while fetching data.'], 500);
+        }   
     }
 
     /**
@@ -40,9 +70,19 @@ class IdentityController extends Controller
      */
     public function show($id)
     {
-        return Identity::findOrFail($id);
-    }
+        $identity = \DB::select("SELECT * FROM msbodymaker_identitas WHERE id = $id")[0] ?? null;
 
+        if (!$identity) {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Identity data ' . $id . ' retrieved successfully.',
+            'data' => $identity,
+        ], Response::HTTP_OK);
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -71,15 +111,9 @@ class IdentityController extends Controller
             // Custom success message
             $message = 'Record created successfully';
 
-            // Log the successful creation
-            Log::info($message, ['identity_id' => $identity->id]);
-
             // Return a success response with the newly created record and a 200 status code
             return response()->json(['message' => $message, 'data' => $identity], Response::HTTP_OK);
         } catch (\Exception $e) {
-            // Log the error
-            Log::error('Unable to create record', ['error_message' => $e->getMessage()]);
-
             // Handle any exceptions (e.g., database errors) and return an error response
             return response()->json(['message' => 'Unable to create record', 'error' => $e->getMessage()], 500);
         }
@@ -94,9 +128,41 @@ class IdentityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $identity = Identity::findOrFail($id);
-        $identity->update($request->all());
-        return $identity;
+        // Retrieve the request data for updating (excluding 'id' and 'ms_company_name')
+        $attributesToUpdate = $request->except(['id', 'ms_company_name']);
+
+        // Define the where conditions for the update
+        $whereConditions = ['id' => $id];
+
+        // Find the Identity model by ID
+        $identity = \DB::select("SELECT * FROM msbodymaker_identitas WHERE id = $id")[0] ?? null;
+
+        if (!$identity) {
+            // If the record is not found, return an error response
+            return response()->json([
+                'success' => false,
+                'message' => 'Record not found.',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        // Attempt to update the record based on conditions
+        $updated = \DB::table('msbodymaker_identitas')
+            ->where($whereConditions)
+            ->update($attributesToUpdate);
+
+        if ($updated) {
+            // If the record was successfully updated, return a success response
+            return response()->json([
+                'success' => true,
+                'message' => 'Record updated successfully.',
+            ], Response::HTTP_OK);
+        } else {
+            // If the record was not updated, return an error response
+            return response()->json([
+                'success' => false,
+                'message' => 'Record update failed',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -107,9 +173,19 @@ class IdentityController extends Controller
      */
     public function destroy($id)
     {
-        $identity = Identity::findOrFail($id);
-        $identity->delete();
-        return response()->json(['message' => 'Record deleted successfully']);
+        try {
+            $identity = \DB::select("DELETE FROM msbodymaker_identitas WHERE id = $id");
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Record deleted successfully.',
+            ], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to delete the record',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     public function validationRules() {
