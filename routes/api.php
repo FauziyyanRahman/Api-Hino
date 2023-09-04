@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\Home\HomeController;
 use App\Models\Category;
+use App\Models\Karoseri\DesignTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Message\MessageController;
-
+use App\Http\Controllers\Karoseri\DesignToolsController;
 use App\Http\Controllers\Karoseri\IdentityController;
 
 /*
@@ -70,4 +71,10 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/identities', [IdentityController::class, 'store']);
     Route::put('/identities/{id}', [IdentityController::class, 'update']);
     Route::delete('/identities/{id}', [IdentityController::class, 'destroy']);
+
+    Route::get('/design-tools', [DesignToolsController::class, 'index']);
+    Route::get('/design-tools/{id}', [DesignToolsController::class, 'show']);
+    Route::post('/design-tools', [DesignToolsController::class, 'store']);
+    Route::put('/design-tools/{id}', [DesignToolsController::class, 'update']);
+    Route::delete('/design-tools/{id}', [DesignToolsController::class, 'destroy']);
 });
