@@ -1,11 +1,8 @@
 <?php
 
-use App\Http\Controllers\Home\HomeController;
-use App\Models\Category;
-use App\Models\Karoseri\DesignTools;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthController;
+use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Message\MessageController;
@@ -13,6 +10,7 @@ use App\Http\Controllers\Karoseri\DesignToolsController;
 use App\Http\Controllers\Karoseri\IdentityController;
 use App\Http\Controllers\Karoseri\EquipmentController;
 use App\Http\Controllers\Karoseri\PicController;
+use App\Http\Controllers\Karoseri\ProductCapacityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,4 +89,10 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/pic', [PicController::class, 'store']);
     Route::put('/pic/{id}/{area}', [PicController::class, 'update']);
     Route::delete('/pic/{id}', [PicController::class, 'destroy']);
+
+    Route::get('/product-capacity', [ProductCapacityController::class, 'index']);
+    Route::get('/product-capacity/{id}', [ProductCapacityController::class, 'show']);
+    Route::post('/product-capacity', [ProductCapacityController::class, 'store']);
+    Route::put('/product-capacity/{id}', [ProductCapacityController::class, 'update']);
+    Route::delete('/product-capacity/{id}', [ProductCapacityController::class, 'destroy']);
 });
