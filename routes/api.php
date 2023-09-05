@@ -14,6 +14,7 @@ use App\Http\Controllers\Karoseri\ProductCapacityController;
 use App\Http\Controllers\Karoseri\ChassisController;
 use App\Http\Controllers\Karoseri\VariantController;
 use App\Http\Controllers\Karoseri\SkrbController;
+use App\Http\Controllers\Karoseri\WebUsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,4 +117,10 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/skrb', [SkrbController::class, 'store']);
     Route::put('/skrb/{id}/{idSk}', [SkrbController::class, 'update']);
     Route::delete('/skrb/{id}', [SkrbController::class, 'destroy']);
+
+    Route::get('/web-users', [WebUsersController::class, 'index']);
+    Route::get('/web-users/{id}', [WebUsersController::class, 'show']);
+    Route::post('/web-users', [WebUsersController::class, 'store']);
+    Route::put('/web-users/{id}/{idPic}', [WebUsersController::class, 'update']);
+    Route::delete('/web-users/{id}', [WebUsersController::class, 'destroy']);
 });
