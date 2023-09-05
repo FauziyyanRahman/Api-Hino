@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\AuthController;
 use App\Http\Controllers\Home\HomeController;
-use App\Http\Controllers\News\NewsController;
+use App\Http\Controllers\Banners\BannersController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Message\MessageController;
+use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\Karoseri\DesignToolsController;
 use App\Http\Controllers\Karoseri\IdentityController;
 use App\Http\Controllers\Karoseri\EquipmentController;
@@ -123,4 +124,10 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/web-users', [WebUsersController::class, 'store']);
     Route::put('/web-users/{id}/{idPic}', [WebUsersController::class, 'update']);
     Route::delete('/web-users/{id}', [WebUsersController::class, 'destroy']);
+
+    Route::get('/banners', [BannersController::class, 'index']);
+    Route::get('/banners/{id}/{typeB}', [BannersController::class, 'show']);
+    Route::post('/banners', [BannersController::class, 'store']);
+    Route::put('/banners/{id}/{idBanners}', [BannersController::class, 'update']);
+    Route::delete('/banners/{id}/{idBanners}', [BannersController::class, 'destroy']);
 });
