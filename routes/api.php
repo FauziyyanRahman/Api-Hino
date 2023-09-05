@@ -11,6 +11,7 @@ use App\Http\Controllers\Karoseri\IdentityController;
 use App\Http\Controllers\Karoseri\EquipmentController;
 use App\Http\Controllers\Karoseri\PicController;
 use App\Http\Controllers\Karoseri\ProductCapacityController;
+use App\Http\Controllers\Karoseri\ChassisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,4 +96,10 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/product-capacity', [ProductCapacityController::class, 'store']);
     Route::put('/product-capacity/{id}', [ProductCapacityController::class, 'update']);
     Route::delete('/product-capacity/{id}', [ProductCapacityController::class, 'destroy']);
+
+    Route::get('/chassis', [ChassisController::class, 'index']);
+    Route::get('/chassis/{id}', [ChassisController::class, 'show']);
+    Route::post('/chassis', [ChassisController::class, 'store']);
+    Route::put('/chassis/{id}/{chassis}', [ChassisController::class, 'update']);
+    Route::delete('/chassis/{id}', [ChassisController::class, 'destroy']);
 });

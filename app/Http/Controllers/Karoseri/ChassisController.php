@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Karoseri;
 
 use App\Http\Controllers\Controller;
-use App\Models\Karoseri\Pic;
+use App\Models\Karoseri\Chassis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class PicController extends Controller
+class ChassisController extends Controller
 {
-    
     public function __construct()
     {
         // Apply the 'auth.api' middleware to the functions that require authentication.
@@ -27,10 +26,10 @@ class PicController extends Controller
     
             if ($pageSize && $page) {
                 // If both page_size and page parameters are provided, paginate the results
-                $equipment = Pic::paginate($pageSize, ['*'], 'page', $page);
+                $equipment = Chassis::paginate($pageSize, ['*'], 'page', $page);
             } else {
                 // If no pagination parameters are provided, retrieve all records
-                $equipment = Pic::withTrashed()->get();
+                $equipment = Chassis::withTrashed()->get();
             }
     
             // Check if any records were found
@@ -41,7 +40,7 @@ class PicController extends Controller
             // Return the records as JSON
             return response()->json([
                 'success' => true,
-                'message' => 'Person in charge data retrieved successfully.',
+                'message' => 'Chassis data retrieved successfully.',
                 'data' => $equipment,
             ], Response::HTTP_OK);
         } catch (\Exception $e) {
@@ -52,16 +51,16 @@ class PicController extends Controller
 
     public function show($id)
     {
-        $pic = \DB::select("SELECT * FROM msbodymaker_pic WHERE ms_company_id = $id");
+        $designTool = \DB::select("SELECT * FROM msbodymaker_hino_chassis_use WHERE ms_company_id = $id");
 
-        if (!$pic) {
+        if (!$designTool) {
             return response()->json(['message' => 'Record not found'], 404);
         }
 
         return response()->json([
             'success' => true,
-            'message' => 'Person in charge data for company id ' . $id . ' retrieved successfully.',
-            'data' => $pic,
+            'message' => 'Chassis data for company id ' . $id . ' retrieved successfully.',
+            'data' => $designTool,
         ], Response::HTTP_OK);
     }
 
@@ -69,11 +68,9 @@ class PicController extends Controller
     {
         // Validate the incoming JSON data
         $validator = Validator::make($request->all(), [
-            '*.ms_job_area' => 'required',
-            '*.ms_name' => 'required',
-            '*.ms_email' => 'required|email',
-            '*.ms_phone_number' => 'required|numeric',
-            '*.ms_company_id' => 'required|numeric',
+            '*.ms_type' => 'nullable',
+            '*.ms_unit' => 'nullable',
+            '*.ms_company_id' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -93,10 +90,10 @@ class PicController extends Controller
 
             foreach ($validatedData as $data) {
                 // Create a new design tool record with the validated data
-                $pic = Pic::create($data);
+                $chassis = Chassis::create($data);
 
                 // Add the created record to the array
-                $createdRecords[] = $pic;
+                $createdRecords[] = $chassis;
             }
 
             // Commit the database transaction if all records were created successfully
@@ -115,15 +112,15 @@ class PicController extends Controller
         }
     }
 
-    public function update(Request $request, $id, $area)
+    public function update(Request $request, $id, $chassis)
     {
-        $attributesToUpdate = $request->except(['id', 'ms_company_id', 'ms_job_area']);
+        $attributesToUpdate = $request->except(['id', 'ms_company_id', 'ms_type']);
 
         // Define the where conditions for the update
-        $whereConditions = ['ms_company_id' => $id, 'ms_job_area' => $area];
+        $whereConditions = ['ms_company_id' => $id, 'ms_type' => $chassis];
 
         // Find the Identity model by ID
-        $pic = \DB::select("SELECT * FROM msbodymaker_pic WHERE ms_company_id = $id AND ms_job_area = '$area'")[0] ?? null;
+        $pic = \DB::select("SELECT * FROM msbodymaker_hino_chassis_use WHERE ms_company_id = $id AND ms_type = '$chassis'")[0] ?? null;
 
         if (!$pic) {
             // If the record is not found, return an error response
@@ -134,7 +131,7 @@ class PicController extends Controller
         }
 
         // Attempt to update the record based on conditions
-        $updated = \DB::table('msbodymaker_pic')
+        $updated = \DB::table('msbodymaker_hino_chassis_use')
             ->where($whereConditions)
             ->update($attributesToUpdate);
 
@@ -157,7 +154,7 @@ class PicController extends Controller
     {
         // Delete a specific design tool
         try {
-            $pic = \DB::select("DELETE FROM msbodymaker_pic WHERE ms_company_id = $id");
+            $designTool = \DB::select("DELETE FROM msbodymaker_hino_chassis_use WHERE ms_company_id = $id");
     
             return response()->json([
                 'success' => true,
