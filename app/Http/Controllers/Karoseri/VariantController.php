@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Karoseri;
 
 use App\Http\Controllers\Controller;
-use App\Models\Karoseri\Pic;
+use App\Models\Karoseri\Variant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class PicController extends Controller
+class VariantController extends Controller
 {
     public function __construct()
     {
@@ -26,10 +26,10 @@ class PicController extends Controller
     
             if ($pageSize && $page) {
                 // If both page_size and page parameters are provided, paginate the results
-                $equipment = Pic::paginate($pageSize, ['*'], 'page', $page);
+                $equipment = Variant::paginate($pageSize, ['*'], 'page', $page);
             } else {
                 // If no pagination parameters are provided, retrieve all records
-                $equipment = Pic::withTrashed()->get();
+                $equipment = Variant::withTrashed()->get();
             }
     
             // Check if any records were found
@@ -40,7 +40,7 @@ class PicController extends Controller
             // Return the records as JSON
             return response()->json([
                 'success' => true,
-                'message' => 'Person in charge data retrieved successfully.',
+                'message' => 'Variant product data retrieved successfully.',
                 'data' => $equipment,
             ], Response::HTTP_OK);
         } catch (\Exception $e) {
@@ -51,7 +51,7 @@ class PicController extends Controller
 
     public function show($id)
     {
-        $pic = \DB::select("SELECT * FROM msbodymaker_pic WHERE ms_company_id = $id");
+        $pic = \DB::select("SELECT * FROM msbodymaker_variant_product WHERE ms_company_id = $id");
 
         if (!$pic) {
             return response()->json(['message' => 'Record not found'], 404);
@@ -59,7 +59,7 @@ class PicController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Person in charge data for company id ' . $id . ' retrieved successfully.',
+            'message' => 'Variant product data for company id ' . $id . ' retrieved successfully.',
             'data' => $pic,
         ], Response::HTTP_OK);
     }
@@ -68,11 +68,37 @@ class PicController extends Controller
     {
         // Validate the incoming JSON data
         $validator = Validator::make($request->all(), [
-            '*.ms_job_area' => 'required',
-            '*.ms_name' => 'required',
-            '*.ms_email' => 'required|email',
-            '*.ms_phone_number' => 'required|numeric',
-            '*.ms_company_id' => 'required|numeric',
+            'ms_dump' => 'nullable',
+            'ms_box' => 'nullable',
+            'ms_wing_box' => 'nullable',
+            'ms_tanki_pertamina' => 'nullable',
+            'ms_tank_air' => 'nullable',
+            'ms_cpo' => 'nullable',
+            'ms_cargo' => 'nullable',
+            'ms_pemadam_kebaran' => 'nullable',
+            'ms_mixer' => 'nullable',
+            'ms_box_pendingin' => 'nullable',
+            'ms_car_carrier' => 'nullable',
+            'ms_compactor' => 'nullable',
+            'ms_arm_roll' => 'nullable',
+            'ms_skylift' => 'nullable',
+            'ms_road_sweeper' => 'nullable',
+            'ms_field_16' => 'nullable', 
+            'ms_field_17' => 'nullable', 
+            'ms_field_18' => 'nullable', 
+            'ms_field_19' => 'nullable', 
+            'ms_field_20' => 'nullable', 
+            'ms_field_21' => 'nullable', 
+            'ms_field_22' => 'nullable', 
+            'ms_field_23' => 'nullable', 
+            'ms_field_24' => 'nullable', 
+            'ms_field_25' => 'nullable', 
+            'ms_field_26' => 'nullable', 
+            'ms_field_27' => 'nullable', 
+            'ms_field_28' => 'nullable', 
+            'ms_field_29' => 'nullable', 
+            'ms_field_30' => 'nullable',  
+            'ms_company_id' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -81,48 +107,31 @@ class PicController extends Controller
         }
 
         try {
-            // Start a database transaction
-            DB::beginTransaction();
-
             // Access the validated data from the validator
-            $validatedData = $validator->validated();
+            $validatedData = $validator->validate();
 
-            // Initialize an empty array to store the created records
-            $createdRecords = [];
+            // Create a new design tool record with the validated data
+            $designTool = Variant::create($validatedData);
 
-            foreach ($validatedData as $data) {
-                // Create a new design tool record with the validated data
-                $pic = Pic::create($data);
+            $message = 'Record created successfully';
 
-                // Add the created record to the array
-                $createdRecords[] = $pic;
-            }
-
-            // Commit the database transaction if all records were created successfully
-            DB::commit();
-
-            $message = 'All records created successfully';
-
-            // Return a success response with the newly created records and a 201 status code
-            return response()->json(['message' => $message, 'data' => $createdRecords], Response::HTTP_CREATED);
+            // Return a success response with the newly created record and a 200 status code
+            return response()->json(['message' => $message, 'data' => $designTool], Response::HTTP_CREATED);
         } catch (\Exception $e) {
-            // Roll back the database transaction in case of an exception
-            DB::rollback();
-
             // Handle any exceptions (e.g., database errors) and return an error response
-            return response()->json(['message' => 'Unable to create records', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Unable to create record', 'error' => $e->getMessage()], 500);
         }
     }
 
-    public function update(Request $request, $id, $area)
+    public function update(Request $request, $id)
     {
-        $attributesToUpdate = $request->except(['id', 'ms_company_id', 'ms_job_area']);
+        $attributesToUpdate = $request->except(['id', 'ms_company_id']);
 
         // Define the where conditions for the update
-        $whereConditions = ['ms_company_id' => $id, 'ms_job_area' => $area];
+        $whereConditions = ['ms_company_id' => $id];
 
         // Find the Identity model by ID
-        $pic = \DB::select("SELECT * FROM msbodymaker_pic WHERE ms_company_id = $id AND ms_job_area = '$area'")[0] ?? null;
+        $pic = \DB::select("SELECT * FROM msbodymaker_variant_product WHERE ms_company_id = $id")[0] ?? null;
 
         if (!$pic) {
             // If the record is not found, return an error response
@@ -133,7 +142,7 @@ class PicController extends Controller
         }
 
         // Attempt to update the record based on conditions
-        $updated = \DB::table('msbodymaker_pic')
+        $updated = \DB::table('msbodymaker_variant_product')
             ->where($whereConditions)
             ->update($attributesToUpdate);
 
@@ -156,7 +165,7 @@ class PicController extends Controller
     {
         // Delete a specific design tool
         try {
-            $pic = \DB::select("DELETE FROM msbodymaker_pic WHERE ms_company_id = $id");
+            $pic = \DB::select("DELETE FROM msbodymaker_variant_product WHERE ms_company_id = $id");
     
             return response()->json([
                 'success' => true,

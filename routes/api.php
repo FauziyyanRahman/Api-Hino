@@ -12,6 +12,8 @@ use App\Http\Controllers\Karoseri\EquipmentController;
 use App\Http\Controllers\Karoseri\PicController;
 use App\Http\Controllers\Karoseri\ProductCapacityController;
 use App\Http\Controllers\Karoseri\ChassisController;
+use App\Http\Controllers\Karoseri\VariantController;
+use App\Http\Controllers\Karoseri\SkrbController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,4 +104,16 @@ Route::group(['middleware' => 'auth.api'], function () {
     Route::post('/chassis', [ChassisController::class, 'store']);
     Route::put('/chassis/{id}/{chassis}', [ChassisController::class, 'update']);
     Route::delete('/chassis/{id}', [ChassisController::class, 'destroy']);
+
+    Route::get('/variant', [VariantController::class, 'index']);
+    Route::get('/variant/{id}', [VariantController::class, 'show']);
+    Route::post('/variant', [VariantController::class, 'store']);
+    Route::put('/variant/{id}', [VariantController::class, 'update']);
+    Route::delete('/variant/{id}', [VariantController::class, 'destroy']);
+
+    Route::get('/skrb', [SkrbController::class, 'index']);
+    Route::get('/skrb/{id}', [SkrbController::class, 'show']);
+    Route::post('/skrb', [SkrbController::class, 'store']);
+    Route::put('/skrb/{id}/{idSk}', [SkrbController::class, 'update']);
+    Route::delete('/skrb/{id}', [SkrbController::class, 'destroy']);
 });
